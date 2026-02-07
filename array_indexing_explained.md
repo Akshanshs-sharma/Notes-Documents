@@ -10,9 +10,6 @@ The expression arr[i] is internally interpreted as:
 
 In pseudo-memory terms:
 
-plaintext
-Copy
-Edit
 arr[0] = *(arr + 0)
 arr[1] = *(arr + 1)
 So, when you write arr[0], you're not actually accessing the "zeroth item" in the literal sense, but rather saying:
