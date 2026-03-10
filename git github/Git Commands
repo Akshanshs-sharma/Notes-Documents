@@ -1,0 +1,223 @@
+/**
+## BASIC GIT COMMANDS  WITH  THEIR FLAGS##
+
+TERMINOLOGY THAT WILL HELP 
+
+1 Positional Arguments (also just called "arguments" or "operands")
+
+   a. These are the main things the command operates on.
+
+   b. They have no dash/prefix and their order/position matters.
+Examples in Git:
+                git checkout feature1 → feature1 is a positional argument (the branch name).
+                git add file.txt → file.txt is positional.
+                git push origin main → origin and main are both positional.
+
+    c.They tell the command what to act on (files, branches, remotes, commits, etc.).
+
+2. Options (also called "flags", "switches", or "options")
+
+    a.These modify how the command behaves.
+    b.They usually start with a dash: single dash for short options, double dash for long ones.
+    c.They can be optional (most are) or sometimes required.
+
+Two main sub-types:
+
+        2.1. Boolean options / pure flags / switches (no value needed)
+                
+            a.Just presence = on/true, absence = off/false.
+            b.Short: -d, -f, -v (verbose)
+            c.Long: --delete, --force, --verbose
+        Example: git push origin --delete feature1
+                → --delete is a boolean flag (or just "flag" / "switch").
+                -d and --delete are exactly the same in meaning — short and long versions of the same option.
+
+        2.2 Options that take a value (also called "parameters" to the option)
+
+             a.They need something after them (either stuck to it or separated by space).
+        Examples:
+        git commit -m "message" → -m takes "message" as its value.
+        git push -u origin main → -u (short for --set-upstream) doesn't take a separate value — it's boolean.
+        git log --since=1.week → --since takes 1.week as value.
+
+            b.The value part is sometimes called an option-argument or parameter (of the option).
+
+
+
+
+git init   ## used to create an empty git repository to local
+            --bare ## used to create repo without working directory
+
+git add   ## add files on the staging area which is the pre-commit area
+
+git commit  ## this ensures that the changes are saved to the local repo
+            -a  ## is used to commit snapshots of all the changes in the staging
+            -m  ## is used to write message
+            --amend -m  ## used to change the message of the last committed.
+
+
+git status ## used to check the status of the repository / show paths with changes
+            -b ## used to show current branch name
+            -u ## used to track untracked files
+            --ignored ## used to show all ignored files
+
+
+git branch <branch-name> ## used to create a branch diversion from main branch
+            -d / --delete ## used to delete a branch on local
+            -D  ## used to forcefully delete
+            -m  ## used to rename the branch
+            -m <old-name> <new-name> ## second command to rename branch
+            -a ## used for all branches (local + remote)
+            -v  ## used to show last commit
+
+git checkout <branch-name> ## is used to switch between the branch
+            -b <branch-name>  ## used to create a branch and immediately switch to new branch
+            -t <remote-name> <branch-name>  ## used to switch in remote repository before it , you must run git fetch command
+git switch <branch-name> ## is used to switch between the branch
+            -c <branch-name>  ## used to create a branch and immediately switch to new branch
+git push -u <remote-name> <branch-name>  ## used to add it on aur remote git repository
+git push <remote-name> --delete <branch-name> ##  used to delete branch from the remote repository
+
+
+
+git remote add <remote-name> <url>  ## used to connect your local repository to a remote repository
+            -v ## used to see connected remote
+            remove ##Deletes remote configuration (does NOT delete repo)
+            set-url origin <new_url> ## used to set new url
+            rename  ## used to remate remote
+
+
+
+git push <remote-name> <branch-name>  ## used to push the commits to the central repository
+            -u / --set-upstream ## used to set upstream.
+            --all ## used to push all branches
+            --force ## used for force push(overwrite remote history)
+
+
+git merge ##used to merge multiple commits from various branches
+			<branch-name>  ##Merge specified branch into current branch.
+			<commit>  ##used to merge a certain commit
+            --squash  ## used to combine all the commits into one  (git merge --squash feature)
+            --abort  ## used to cancel merge during conflicts
+            --ff-only ## merge only when fast-forward possible  # ussed when there is a linear path of commit present from current branch to the tip of the master branch
+			--no-ff<branch-name>  ## force merge commit(No fast-forward)
+			-s recursive <first-branch> <second-branch>   ##used in the case of two head
+			-s octopus  ##used to deal with scenarios where there are more than two heads are present  #it is a default merging strategy used during pulling and merging more than one branch
+			-s resolve  ## used to deal with two head only # It uses a 3-way merging strategy 
+			-s subtree ## considered the modified version of recursive merging strategy 
+
+
+
+git fetch  ## Used to Download changes made remote BUT does not merge
+            --all  ## used to fetch from all remotes
+            --prune  ## used to Remove deleted remote branches locally
+            --dry-run  ## used to Show what would be fetched
+            <remote-name>  ##used to Fetch specific remote
+            <remote-name/><branch-name/>  ## used to Fetch specific branch
+
+
+
+git pull  ## used to  Download changes made remote and merge also (fetch+merge)
+            --rebase  ## used to Fetch + Rebase instead of merge  // Cleaner history
+            --all  ## pull from all remotes
+            <remote-name/><branch-name/>  ## used to pull from specific branch
+            --dry-run  ## used to preview changes
+
+
+git rebase <branch-name/>  ## used to reapply current branch to the top of the main/another branch
+            -i  ## used for interactive rebase(edit/squash/reorder commits) git rebase -i HEAD~3 (combine last three commit into one)
+            --rebase-merges  ##used to preserve merge commits during rebase
+            --continue  ##used to continue after resolving conflicts
+            --abort  ##used to cancel rebase and store previous state
+            --skip  ## used to skip current conflicting commit
+            --onto  ## used to move branch to different base (git rebase --onto <new-base> <old-base> branch)
+            --root  ##used to rebase from root commit
+
+
+
+git cherry-pick <commit-hash/>  ## used to apply a specific commit from another branch
+            --continue  ##used to continue after resolving conflicts
+            --abort  ##used to cancel cherry-pick
+            --skip  ## used to kip problematic commit
+            -e  ## used to edit commit message before committing
+            -n / --no-commit  ##used to apply changes  without committing
+            --strategy=<name>  ##used to choose merge strategy
+
+
+git log  ##used to show committed history
+            --oneline  ## one commit per line (short hash + message)
+            --graph  ## used to show branches graph visually
+            --decorate  ##used to show branches/tag name
+            -p  ##used to show changes in each commit
+            --author="name"  ##used to search by author name
+            --time  ##used to filter by time
+            -n 5  ## used to show last 5 commits
+
+
+git clone <repo-url/>  ##used to copies remote repository to local repository
+            --branch<name/>  ## used to clone specific branch
+            --recurse-submodule  ##used to clone with submodule
+            --bare <url/>  ##used to clone without working directory
+
+git revert <commit-id/>  ##used to safely undo a commit(create a new commit that reverses changes) // safe for shared branches
+            --edit  ##used to edit commit message
+            --no-edit  ## used to skip commit message editor
+            --no-commit or -n  ##used to apply change but don't commit
+
+git reset <commit-id/>  ##used to move HEAD to specific commit //Rewrites history , Moves HEAD and MAIN  to specific commits. // does not remove any data
+            --soft <id> ##used to Undo commit, keep changes staged
+            --mixed<id/>  ##used to undo commit , unstage changes
+            --Hard <id/>  ##used to delete commit + delete changes
+            --keep  ## used to reset but keep local changes
+            --merge  ##used to reset but preserve merge changes
+            -p  ##used to interactive reset(patch mode)
+            HEAD~1  ##reset to previous commit
+
+
+git tag  ##used ti create version labels  (git tag v1.0)
+            -a  ## used to create annotated tag
+            -m  ## used to add message
+            -d  ## used to delete tag locally
+            -l  ## used to list all tags
+            --contains  ##show tags containing commit
+
+git stash  ## used to store your uncommitted change temporarily  Useful when you need to switch branches quickly
+
+
+git diff ##used to shows the difference between changes Working directory ↔ Staging area , Staging area ↔ Last commit, Branch ↔ Branch , Commit ↔ Commit
+            --staged or --cached  ## used to difference between staging area and last commit
+            HEAD~1 HEAD  ## used to compare last commit with previous commit
+            main feature/account-service  ## see what difference between branches
+            --name-only  ## used to shows only file names changed
+            --name-status  ##used to show file + status
+            --stat  ## used to show summary , very useful before committing
+            -p  ##used to shows patch format
+            -w  ## used to ignore whitespace changes  very useful for formatting changes only
+            --word-diff  ## used to word level difference rather than line level , Very useful for documentation changes
+            --diff-filter=A,M,D,R  ##used to add filter such as Added , Modified , Deleted , Renamed
+            --patch-with-start  ##used to show patch + summary together
+
+ git config <key> <value>  ## used to set git configuration file git config stored at 3 level Local, Global, System
+            --global  ##used to apply to all repository(for current user)
+            --local  ## used to apply current repo (default if inside repo)
+            --system  ## applies to whole system (requires admin)
+            --list  ## show all config values
+            --get  ## get specific value (git config --get user.name)
+            --get-all ## show all values for key (git config --get-all remote.origin.url)
+            --unset  ## used to remove config values (git config --unset user.name)
+            --unset-all  ##used to remove multiple values for same key
+            --edit ## used to open config file in editor (git config --global --edit)
+            --show-origin  ##used to shows where config is coming from (file path) (git config --list --show-origin)  ##Very useful for debugging##
+
+
+ git show  ## used to get the detailed info about : commit , tag, branch references, any git object : By default - commit metadata , diff
+            <commit-hash/>  ## used to show specific commit
+            --pretty  ##used to show customized commit output  (git show --pretty=(oneline , short, full, format:))(git show --pretty=format:"%h - %an - %s")
+            --abbrev-commit  ##used to show short commit ID
+            --no-abbrev-commit  ##used to show full commit hash
+            --ignore-all-space  ##used to ignore all whitespaces
+            --stat  ##used to show summary of changes(files changed , Insertions, Deletions)
+            --name-only  ##used to show only names of the changed file
+            --name-status  ##used to show file name with status(A = Added , M = modified , D = deleted)
+            --relative  ## used to shows paths relative to current directory
+  * */

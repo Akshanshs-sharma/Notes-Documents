@@ -1,0 +1,70 @@
+SELECT 
+	first_name ,
+    last_name ,
+    gender
+FROM patients
+where gender = 'M';
+
+SELECT first_name ,
+	last_name
+FROM patients
+where allergies IS NULL;
+
+select first_name
+FROM patients
+WHERE first_name like "C%";
+
+SELECT first_name,
+	last_name
+FROM patients
+Where weight > 100 and weight < 121;
+WHERE weight between 100 and 120;
+
+UPDATE  patients 
+SET allergies = 'NKA'
+WHERE allergies IS NULL;
+
+SELECT CONCAT(first_name,' ',last_name) AS full_name
+from patients;
+
+SELECT first_name,last_name,max(height)
+FROM patients;
+
+SELECT * 
+from patients 
+WHERE patient_id IN (1,45,534,879,1000);
+
+SELECT
+COUNT(patient_id)
+FROM admissions;
+
+SELECT * 
+FROM patients
+WHERE discharge_date = admission_date;
+
+select
+	distinct CITY 
+FROM patients 
+WHERE province_id = 'NS';
+
+select city
+FROM patients
+where province_id = 'NS'
+group by city;
+
+select city 
+from patients
+group by city 
+having province_id = 'NS';
+
+
+select first_name,last_name,birth_date
+from patients
+where height > 160 and weight >70;
+
+select first_name,last_name,allergies
+from patients
+where allergies is not NULL
+       AND city = 'Hamilton';
+
+
