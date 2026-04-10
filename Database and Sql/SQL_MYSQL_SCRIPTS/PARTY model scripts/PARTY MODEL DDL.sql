@@ -122,9 +122,22 @@ ADD COLUMN has_table char(1),
 ADD COLUMN description VARCHAR(255),
 ADD COLUMN parent_type_id VARCHAR(50);
 
+-- ALTER TABLE party 
+-- MODIFY COLOUMN party;
 
-ANALYZE sql_practice_1;
+-- ANALYZE sql_practice_1;
 
+CREATE INDEX contact_mech_type_idx on contact_mech(contact_mech_type_id);
 
+SHOW INDEX FROM contact_mech;
 
+SELECT index_name,column_name,non_unique
+from information_schema.statistics
+where table_schema = 'sql_practice'
+   and table_name = 'contact_mech';
+   
+   SELECT *
+from information_schema.statistics
+where table_schema = 'sql_practice'
+   and table_name = 'contact_mech';
  

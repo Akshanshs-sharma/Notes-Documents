@@ -169,7 +169,7 @@ VALUES
 
 SELECT * FROM party_relationship;
 
-
+			
 
 
 -- INSERT INTO party_relationship( party_id_to, party_id_from , role_type_id_to, role_type_id_from, from_date, party_relationship_type_id)
@@ -183,4 +183,57 @@ SELECT * FROM party_relationship;
 -- (2,5,'MANAGER','EMPLOYEE',CURRENT_TIMESTAMP,'REPORTS_TO').
 -- (1,3,'ORGANIZATION_ROLE','MANAGER',CURRENT_TIMESTAMP,'REPORTS_TO'),
 -- (1,4,'ORGANIZATION_ROLE','MANAGER',CURRENT_TIMESTAMP,'REPORTS_TO');
+
+
+INSERT INTO contact_mech_type( contact_mech_type_id ,has_table,description)
+ VALUES 
+ ('TELECOM_NUMBER','Y','phone number to contact a party'),
+ ('POSTAL_ADDRESS','N','TABLE TO BE MADE'),
+ ('EMAIL','N','EMAIL TO CONTACT');
+ 
+ DELETE 
+ FROM contact_mech_type
+ WHERE contact_mech_type_id = 'EMAIL';
+
+INSERT INTO contact_mech_purpose_type
+( contact_mech_purpose_type_id )
+VALUES 
+("BILLING_LOCATION"),
+("PRIMARY_LOCATION"),
+("SHIPPING_LOCATION"),
+("PHONE_HOME"),
+("PHONE_WORK");
+select * from contact_mech;
+INSERT INTO contact_mech(contact_mech_id,contact_mech_type_id)
+values
+('CM001','TELECOM_NUMBER'),
+('CM002','POSTAL_ADDRESS'),
+('CM003','POSTAL_ADDRESS');
+
+select * from contact_mech_type_purpose;
+INSERT INTO contact_mech_type_purpose(contact_mech_type_id,contact_mech_purpose_type_id)
+VALUES
+('POSTAL_ADDRESS','BILLING_LOCATION'),
+('POSTAL_ADDRESS','PRIMARY_LOCATION'),
+('POSTAL_ADDRESS','SHIPPING_LOCATION');
+
+INSERT INTO contact_mech_type_purpose(contact_mech_type_id,contact_mech_purpose_type_id)
+VALUES
+('TELECOM_NUMBER','PHONE_HOME'),
+('TELECOM_NUMBER','PHONE_WORK');
+
+
+select * from contact_mech;
+select * from contact_mech_type;
+select * from telecom_number;
+SELECT * FROM contact_mech_purpose_type;
+SELECT * FROM contact_mech_type_purpose;
+
+
+
+
+
+
+
+
 
